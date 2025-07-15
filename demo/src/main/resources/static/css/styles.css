@@ -4,8 +4,8 @@ html {
 }
 
 body {
-  font-family: 'SF Pro Display', Arial, Helvetica, serif;
-  font-size: 12px;
+  font-family: 'Arial Rounded', sans-serif;
+  font-size: 16px;
   background-color: #ffffff;
   border: 1px solid #cccccc;
   margin: 0 auto;
@@ -46,7 +46,7 @@ table > tbody > tr, table > thead > tr {
 }
 
 table th {
-  background-color: #99cc33;
+  background-color: #cad4ff;
 }
 
 table > tbody > tr > td > a, table > tbody > tr > td > a:hover {
