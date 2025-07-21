@@ -75,7 +75,7 @@ public class TodoController {
         return "redirect:/todos/list";
     }
 
-    @PostMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         todos.removeIf(t -> t.getId().equals(id));
         return "redirect:/todos/list";
