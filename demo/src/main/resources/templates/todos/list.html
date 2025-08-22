@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
-    <title>Task Management</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+  <title>Task Management</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
 </head>
 
 <body>
-    <main class="container">
-        <h2 class="text-center mb-4 text-primary">To-do List</h2>
-        <div class="text-center mb-4">
-            <a href="/todos/register" class="btn btn-primary">Add New To-do</a>
-        </div>
-        <table class="table table-striped align-middle">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Responsible</th>
-                    <th>Due Date</th>
-                    <th class="text-end">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="todo : ${todos}">
-                    <td th:text="${todo.title}"></td>
-                    <td th:text="${todo.dueDate}"></td>
-                    <td th:text="${todo.responsible}"></td>
-                    <td class="text-end">
-                        <a class="btn btn-sm btn-outline-primary" th:href="@{/todos/edit/{id}(id=${todo.id})}" role="button">Edit</a>
-                        <a class="btn btn-sm btn-outline-danger" th:href="@{/todos/delete/{id}(id=${todo.id})}" role="button">Delete</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <p class="mt-4">
-            <a href="/">Return to home</a>
-        </p>
-    </main>
-
-    <footer class="text-center mt-4 text-muted small">
-        <div>&copy; 2025 static template</div>
-    </footer>
+<main class="container">
+  <h2 class="text-center mb-4 text-primary">To-do List</h2>
+  <div class="text-center mb-4">
+    <a href="/todos/register" class="btn btn-primary">Add New To-do</a>
+  </div>
+  <table class="table table-striped align-middle">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Responsible</th>
+      <th>Due Date</th>
+      <th class="text-end">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="todo : ${todos}">
+      <td th:text="${todo.title}"></td>
+      <td th:text="${todo.responsible}"></td>
+      <td th:text="${todo.dueDate}"></td>
+      <td class="text-end">
+        <a class="btn btn-sm btn-outline-primary" th:href="@{/todos/edit/{id}(id=${todo.id})}" role="button">Edit</a>
+        <a class="btn btn-sm btn-outline-danger" th:href="@{/todos/delete/{id}(id=${todo.id})}" role="button">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <p class="mt-4">
+    <a href="/">Return to home</a>
+  </p>
+</main>
+<footer class="text-center mt-4 text-muted small">
+  <div>&copy; 2025 static template</div>
+</footer>
 </body>
 
 </html>
