@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-GB" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Form</title>
+  <link rel="stylesheet" th:href="@{/styles.css}">
+  <!--
+      NOTE: This interface is based on other projects and is intended only for local testing.
+      The main focus of this assignment is the REST API that will be tested via Postman.
+
+      Author: Christinne
+      Date: 2025-08-25
+  -->
+</head>
+<body>
+<header>
+  <h1>Task Manager</h1>
+</header>
+
+<main>
+  <div class="form-container">
+    <h2 class="form-title" th:text="${task.id == null ? 'Add New Task' : 'Edit Task'}">Add/Edit Task</h2>
+
+    <form th:action="@{/tasks/save}" th:object="${task}" method="post">
+      <input type="hidden" th:field="*{id}" />
+
+      <div class="form-group">
+        <label for="name">Task Name</label>
+        <input type="text" th:field="*{name}" id="name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="dueDate">Due Date</label>
+        <input type="date" th:field="*{dueDate}" id="dueDate" required />
+      </div>
+
+      <div class="form-group">
+        <label for="responsible">Person Responsible</label>
+        <input type="text" th:field="*{responsible}" id="responsible" required />
+      </div>
+
+      <div class="form-actions">
+        <a th:href="@{/}" class="btn-cancel">Cancel</a>
+        <button type="submit" class="btn-save">Save</button>
+      </div>
+    </form>
+  </div>
+</main>
+</body>
+</html>
