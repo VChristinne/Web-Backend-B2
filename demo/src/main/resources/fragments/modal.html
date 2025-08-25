@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+
+<!-- Reusable Modal Fragment -->
+<div th:fragment="confirmModal(id, title, message, confirmUrl, confirmButtonText)" class="modal fade" th:id="${id}"
+     tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel" th:text="${title}">Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p th:text="${message}">Are you sure you want to perform this action?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a th:href="${confirmUrl}" class="btn btn-primary" th:text="${confirmButtonText}">Confirm</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete confirmation modal fragment -->
+<div th:fragment="deleteModal(id, itemId)" class="modal fade" th:id="|delete-modal-${itemId}|" tabindex="-1"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this task?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a th:href="@{/todos/delete/{id}(id=${itemId})}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

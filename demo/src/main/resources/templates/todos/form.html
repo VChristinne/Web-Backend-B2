@@ -1,42 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
   <meta charset="UTF-8">
-  <title>Add Todo</title>
-  <link rel='stylesheet' href="/webjars/bootstrap/css/bootstrap.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${todo.id != null ? 'Edit Task' : 'New Task'}">Task Management</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
 </head>
 
-<body>
-<main class="container d-flex justify-content-center align-items-center min-vh-100">
-  <div class="card shadow-lg p-4" style="min-width: 350px; max-width: 400px; width: 100%;">
-    <div class="card-body">
-      <h2 class="card-title text-center mb-4 text-primary">New To-Do</h2>
-      <form th:action="@{/todos/save}" method="post">
-        <input type="hidden" name="id" th:value="${todo.id}"/>
-        <div class="mb-3">
-          <label for="title" class="form-label">Title</label>
-          <input type="text" class="form-control" id="title" name="title" th:value="${todo.title}"/>
+<body class="bg-light d-flex flex-column min-vh-100">
+  <main class="container py-4 flex-grow-1">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <!-- Alert messages -->
+        <div th:replace="~{fragments/alert :: success(${message})}"></div>
+        <div th:replace="~{fragments/alert :: error(${error})}"></div>
+
+        <div class="card shadow">
+          <div class="card-header bg-white py-3">
+            <h2 class="card-title text-center mb-0 text-primary" th:text="${todo.id != null ? 'Edit Task' : 'New Task'}">Task Form</h2>
+          </div>
+          <div class="card-body">
+            <form th:action="@{/todos/save}" th:object="${todo}" method="post" novalidate>
+              <input type="hidden" th:field="*{id}"/>
+
+              <div class="mb-3">
+                <label th:for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" th:field="*{title}"
+                       th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'" />
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+                  Title error message
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label th:for="dueDate" class="form-label">Due date</label>
+                <input type="date" class="form-control" th:field="*{dueDate}"
+                       th:classappend="${#fields.hasErrors('dueDate')} ? 'is-invalid'" />
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('dueDate')}" th:errors="*{dueDate}">
+                  Due date error message
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label th:for="responsible" class="form-label">Responsible</label>
+                <input type="text" class="form-control" th:field="*{responsible}"
+                       th:classappend="${#fields.hasErrors('responsible')} ? 'is-invalid'" />
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('responsible')}" th:errors="*{responsible}">
+                  Responsible error message
+                </div>
+              </div>
+
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="/todos/list" class="btn btn-secondary me-md-2">Cancel</a>
+                <button type="submit" class="btn btn-primary" th:text="${todo.id != null ? 'Update' : 'Save'}">Save</button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="dueDate" class="form-label">Due date</label>
-          <input type="date" class="form-control" id="dueDate" name="dueDate" th:value="${todo.dueDate}"/>
-        </div>
-        <div class="mb-3">
-          <label for="responsible" class="form-label">Responsible</label>
-          <input type="text" class="form-control" id="responsible" name="responsible" th:value="${todo.responsible}"/>
-        </div>
-        <div class="d-grid">
-          <button type="submit" class="btn btn-primary" th:text="${todo.id} != null ? 'Update' : 'Add'"></button>
-        </div>
-      </form>
+      </div>
     </div>
-    <footer class="text-center mt-3 text-muted small">
-      &copy; 2025 static template
-    </footer>
-  </div>
-</main>
+  </main>
+
+  <!-- Footer fragment -->
+  <div th:replace="~{fragments/footer :: copy}"></div>
+
+  <!-- Bootstrap JS -->
+  <script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -2,6 +2,7 @@ package com.chris.demo.controller;
 
 import com.chris.demo.entity.Todo;
 import com.chris.demo.service.TodoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -45,7 +46,7 @@ public class TodoController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Todo todo, BindingResult result, RedirectAttributes attrs) {
+    public String save(@Valid @ModelAttribute Todo todo, BindingResult result, RedirectAttributes attrs) {
         if (result.hasErrors()) {
             return "todos/form";
         }

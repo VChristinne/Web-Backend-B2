@@ -1,24 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Task Management</title>
-  <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+  <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
 </head>
 
-  <body class="bg-light min-vh-100 d-flex flex-column">
-    <div class="container py-5 flex-grow-1 d-flex flex-column align-items-center justify-content-center">
+<body class="bg-light d-flex flex-column min-vh-100">
+<main class="container py-5 flex-grow-1">
+  <!-- Alert messages -->
+  <div th:replace="~{fragments/alert :: success(${message})}"></div>
+  <div th:replace="~{fragments/alert :: error(${error})}"></div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
       <h1 class="mb-3 text-primary">Task Management</h1>
       <p class="lead mb-4">Please select an option:</p>
-      <div class="list-group w-100" style="max-width: 350px;">
-        <a href="/todos/list" class="list-group-item list-group-item-action">List all to-dos</a>
-        <a href="/todos/register" class="list-group-item list-group-item-action">Add new to-do</a>
+
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="list-group">
+            <a href="/todos/list" class="list-group-item list-group-item-action d-flex align-items-center">
+              <span class="me-2">List all tasks</span>
+            </a>
+            <a href="/todos/register" class="list-group-item list-group-item-action d-flex align-items-center">
+              <span class="me-2">Add new task</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-    <footer class="text-center text-muted small py-3 mt-auto">
-      &copy; 2025 static template
-    </footer>
-  </body>
+  </div>
+</main>
+
+<!-- Footer fragment -->
+<div th:replace="~{fragments/footer :: copy}"></div>
+
+<!-- Bootstrap JS -->
+<script src="/webjars/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
 
 </html>

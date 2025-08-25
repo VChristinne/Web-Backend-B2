@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+
+<!-- Success Alert -->
+<div th:fragment="success(message)" th:if="${message}" class="alert alert-success alert-dismissible fade show"
+     role="alert">
+  <i class="bi bi-check-circle-fill me-2"></i>
+  <span th:text="${message}">Success message</span>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<!-- Error Alert -->
+<div th:fragment="error(message)" th:if="${message}" class="alert alert-danger alert-dismissible fade show"
+     role="alert">
+  <i class="bi bi-exclamation-triangle-fill me-2"></i>
+  <span th:text="${message}">Error message</span>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<!-- General Alert -->
+<div th:fragment="alert(type, message)" th:if="${message}"
+     th:class="'alert alert-' + ${type} + ' alert-dismissible fade show'" role="alert">
+  <i th:class="'bi ' + (${type == 'success'} ? 'bi-check-circle-fill' : ${type == 'danger'} ? 'bi-exclamation-triangle-fill' : ${type == 'warning'} ? 'bi-exclamation-triangle-fill' : 'bi-info-circle-fill') + ' me-2'"></i>
+  <span th:text="${message}">Alert message</span>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+</body>
+</html>
