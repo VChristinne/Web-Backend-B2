@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-GB" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager</title>
+  <link rel="stylesheet" th:href="@{/styles.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!--
+      NOTE: This interface is based on other projects and is intended only for local testing.
+      The main focus of this assignment is the REST API that will be tested via Postman.
+
+      Author: Christinne
+      Date: 2025-08-25
+  -->
+</head>
+<body>
+<header>
+  <h1>Task Manager</h1>
+  <div class="header-info">
+    <p class="test-note">This is a test interface - Use Postman for API testing</p>
+    <a th:href="@{/tasks/new}" class="btn-add">
+      <i class="fas fa-plus"></i> New Task
+    </a>
+  </div>
+</header>
+
+<main>
+  <div class="task-container">
+    <!-- Thymeleaf loop to display tasks -->
+    <div class="task-card" th:each="task : ${tasks}">
+      <h3 class="task-title" th:text="${task.name}">Task Name</h3>
+      <div class="task-date">
+        <i class="far fa-calendar-alt"></i> Due:
+        <span th:text="${#temporals.format(task.dueDate, 'dd/MM/yyyy')}">12/12/2025</span>
+      </div>
+      <div class="task-responsible">
+        <i class="far fa-user"></i> Assigned to:
+        <span th:text="${task.responsible ?: 'Unassigned'}">Christinne</span>
+      </div>
+      <div class="task-actions">
+        <a th:href="@{/tasks/edit/{id}(id=${task.id})}" class="btn-edit"><i class="fas fa-edit"></i></a>
+        <a th:href="@{/tasks/delete/{id}(id=${task.id})}" class="btn-delete"><i class="fas fa-trash-alt"></i></a>
+      </div>
+    </div>
+
+    <!-- Show a message if no tasks are found -->
+    <div class="empty-state" th:if="${#lists.isEmpty(tasks)}">
+      No tasks found!
+    </div>
+  </div>
+</main>
+</body>
+</html>
